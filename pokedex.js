@@ -5,25 +5,10 @@ ol$$.setAttribute("class", "ordenateList");
 const baseUrl = `https://pokeapi.co/api/v2/pokemon/?limit=150`;
 const pokeNameUrl = `https://pokeapi.co/api/v2/pokemon/`;
 const limit = `?limit=150`;
-// const pokemons = [null];
-const colors = {
-  fire: "#FDDFDF",
-  grass: "#DEFDE0",
-  electric: "#FCF7DE",
-  water: "#DEF3FD",
-  ground: "#f4e7da",
-  rock: "#d5d5d4",
-  fairy: "#fceaff",
-  poison: "#98d7a5",
-  bug: "#f8d5a3",
-  dragon: "#97b3e6",
-  psychic: "#eaeda1",
-  flying: "#F5F5F5",
-  fighting: "#E6E0D4",
-  normal: "#F5F5F5",
-};
 
 const imgs = {
+  ghost:
+    "https://pm1.narvii.com/7243/1932c3243860328e1f1cd07d65e02649672380ecr1-700-444v2_hq.jpg",
   fire: "https://pm1.narvii.com/7243/8ee17e7a8790303410b30a2fbcb18183fc12166er1-623-499v2_hq.jpg",
   grass:
     "https://pm1.narvii.com/7243/0b36782d158f6da0639e38ebf94af3d5c37288c2r1-668-486v2_hq.jpg",
@@ -51,48 +36,37 @@ const imgs = {
     "https://pm1.narvii.com/7243/f2fb9db8191078f72c8b98fee93155c56e6e8674r1-673-421v2_hq.jpg",
   ice: "https://pm1.narvii.com/7243/fc715e840930cac4f0577c69aa6721ff0b689b11r1-677-462v2_hq.jpg",
 };
-
-const typeColor = Object.keys(colors);
+// const for save keys of object colors and imgs
+//const typeColor = Object.keys(colors);
 const typeImgs = Object.keys(imgs);
-
 // fetch all pokemons with URLs
 // this function have function drawPokemons, for draw pokemons in html page
 const fetchPokemons = async () => {
   const res = await fetch(baseUrl);
   const resjson = await res.json();
-  //console.log(resjson.results);
   const drawPokemons = async () => {
     for (let i of resjson.results) {
-      // pokemons.push(i.name);
       let typeData = [];
       const res = await fetch(i.url);
-      //console.log(i.url);
       const pokedata = await res.json();
+      // poke_types get types of each pokemon, this is used for change background depends type of pokemon
       const poke_types = pokedata.types.map((type) => type.type.name);
+      console.log(poke_types);
       const type = poke_types.find((type) => poke_types.indexOf(type) > -1);
-      const color = colors[type];
       const img = imgs[type];
       pokedata.types.map((type) => typeData.push(type.type.name));
       let typeDataString = typeData.join(", ");
-      //console.log(typeDataString);
       const li$$ = document.createElement("li");
-      li$$.style.backgroundColor = color;
       li$$.style.backgroundImage = `url('${img}')`;
       li$$.setAttribute("class", "card");
       li$$.innerHTML = `<h2>${pokedata.name}</h2><div class="imageContainer"><img class="pokeImg" src="${pokedata.sprites.front_default}" /></div><p>${typeDataString}</p><p>${pokedata.id}</p>
       `;
       ol$$.appendChild(li$$);
-      console.log(typeData);
-      //console.log(pokedata);
     }
   };
-  //console.log(resjson);
   drawPokemons(resjson);
 };
-
 fetchPokemons();
-// console.log(pokemons);
-
 const drawPokemonFilter = async (value) => {
   ol$$.innerHTML = "";
   const res = await fetch(pokeNameUrl + limit);
@@ -103,38 +77,30 @@ const drawPokemonFilter = async (value) => {
   );
   for (const result of resultsInput) {
     let typeData = [];
-    //console.log(result);
     const res2 = await fetch(result.url);
     const res2json = await res2.json();
     const poke_types = res2json.types.map((type) => type.type.name);
     const type = poke_types.find((type) => poke_types.indexOf(type) > -1);
-    const color = colors[type];
     const img = imgs[type];
     res2json.types.map((type) => typeData.push(type.type.name));
     let typeDataString = typeData.join(", ");
-    //console.log(typeDataString);
     const li$$ = document.createElement("li");
-    li$$.style.backgroundColor = color;
     li$$.setAttribute("class", "card");
     li$$.style.backgroundImage = `url('${img}')`;
     li$$.innerHTML = `<h2>${res2json.name}</h2><div class="imageContainer"><img class="pokeImg" src="${res2json.sprites.front_default}" /></div><p>${typeDataString}</p><p>${res2json.id}</p>`;
     ol$$.appendChild(li$$);
   }
-  //console.log(resultsInput);
 };
 
 input$$.addEventListener("input", () => {
   drawPokemonFilter(input$$.value);
 });
-
 //Get the button:
 mybutton = document.querySelector(".pokeball");
-
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function () {
   scrollFunction();
 };
-
 function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
     mybutton.style.display = "block";
@@ -142,7 +108,6 @@ function scrollFunction() {
     mybutton.style.display = "none";
   }
 }
-
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
   document.body.scrollTop = 0; // For Safari
