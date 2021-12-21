@@ -52,25 +52,9 @@ const imgs = {
   ice: "https://pm1.narvii.com/7243/fc715e840930cac4f0577c69aa6721ff0b689b11r1-677-462v2_hq.jpg",
 };
 
-const icons = {
-  fire: "https://static.wikia.nocookie.net/pokemongo/images/0/0a/Icon_Fire.png/revision/latest/scale-to-width-down/25?cb=20171219195825",
-  grass: "https://static.wikia.nocookie.net/pokemongo/images/0/0a/Icon_Grass.png/revision/latest/scale-to-width-down/25?cb=20171219195826",
-  electric: "https://static.wikia.nocookie.net/pokemongo/images/1/1c/Icon_Electric.png/revision/latest/scale-to-width-down/25?cb=20171219195824",
-  water: "https://static.wikia.nocookie.net/pokemongo/images/6/65/Icon_Water.png/revision/latest/scale-to-width-down/25?cb=20171219195830",
-  ground: "https://static.wikia.nocookie.net/pokemongo/images/7/71/Icon_Ground.png/revision/latest/scale-to-width-down/25?cb=20171219195827",
-  rock: "https://static.wikia.nocookie.net/pokemongo/images/5/57/Icon_Rock.png/revision/latest/scale-to-width-down/25?cb=20171219195830",
-  fairy: "https://static.wikia.nocookie.net/pokemongo/images/7/7f/Icon_Fairy.png/revision/latest/scale-to-width-down/25?cb=20171219195824",
-  poison: "https://static.wikia.nocookie.net/pokemongo/images/2/26/Icon_Poison.png/revision/latest/scale-to-width-down/25?cb=20171219195828",
-  bug: "https://static.wikia.nocookie.net/pokemongo/images/8/88/Icon_Bug.png/revision/latest/scale-to-width-down/25?cb=20171219195822",
-  dragon: "https://static.wikia.nocookie.net/pokemongo/images/d/d4/Icon_Dragon.png/revision/latest/scale-to-width-down/25?cb=20171219195823",
-  psychic: "https://static.wikia.nocookie.net/pokemongo/images/c/ce/Icon_Psychic.png/revision/latest/scale-to-width-down/25?cb=20171219195829",
-  flying: "https://static.wikia.nocookie.net/pokemongo/images/b/b0/Icon_Flying.png/revision/latest/scale-to-width-down/25?cb=20171219195826",
-  fighting: "https://static.wikia.nocookie.net/pokemongo/images/f/f0/Icon_Fighting.png/revision/latest/scale-to-width-down/25?cb=20171219195825",
-  normal: "https://static.wikia.nocookie.net/pokemongo/images/4/43/Icon_Normal.png/revision/latest/scale-to-width-down/25?cb=20171219195828",
-};
 const typeColor = Object.keys(colors);
 const typeImgs = Object.keys(imgs);
-const typeIcon = Object.keys(icons);
+
 // fetch all pokemons with URLs
 // this function have function drawPokemons, for draw pokemons in html page
 const fetchPokemons = async () => {
@@ -88,7 +72,6 @@ const fetchPokemons = async () => {
       const type = poke_types.find((type) => poke_types.indexOf(type) > -1);
       const color = colors[type];
       const img = imgs[type];
-      const icon = icons[type]
       pokedata.types.map((type) => typeData.push(type.type.name));
       let typeDataString = typeData.join(", ");
       //console.log(typeDataString);
@@ -96,7 +79,7 @@ const fetchPokemons = async () => {
       li$$.style.backgroundColor = color;
       li$$.style.backgroundImage = `url('${img}')`;
       li$$.setAttribute("class", "card");
-      li$$.innerHTML = `<h2>${pokedata.name}</h2><div class="imageContainer"><img class="pokeImg" src="${pokedata.sprites.front_default}" /></div><p><img src="${icon}" /></p><p>${pokedata.id}</p>
+      li$$.innerHTML = `<h2>${pokedata.name}</h2><div class="imageContainer"><img class="pokeImg" src="${pokedata.sprites.front_default}" /></div><p>${typeDataString}</p><p>${pokedata.id}</p>
       `;
       ol$$.appendChild(li$$);
       console.log(typeData);
