@@ -82,7 +82,7 @@ const fetchPokemons = async () => {
       //console.log(pokedata);
     }
   };
-  console.log(resjson);
+  //console.log(resjson);
   drawPokemons(resjson);
 };
 
