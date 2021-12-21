@@ -31,6 +31,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   border: solid 10px rgb(235, 210, 52);
+  transition: transform 1s ease-out;
   /* transition: ease all 1s; */
 
   /* animation:float 1.3s ease-in-out infinite; */

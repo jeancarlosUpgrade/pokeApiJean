@@ -1,4 +1,4 @@
-// consts ol, input, colors, typeColor and urls APIS
+// consts ol, input, colors, imgs, typeColor and urls-APIS
 const ol$$ = document.querySelector("#pokedex");
 const input$$ = document.querySelector(".pokeSearch");
 ol$$.setAttribute("class", "ordenateList");
