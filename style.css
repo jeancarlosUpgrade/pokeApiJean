@@ -1,7 +1,9 @@
-@import url("http://fonts.cdnfonts.com/css/pokemon-solid");
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+@font-face {
+  font-family: "Pokemon Solid";
+  src: url("./assets/Pokemon\ Solid.ttf");
+}
 .tracking-in-expand {
   font-family: "Pokemon Solid", sans-serif;
   color: rgb(235, 210, 52);
@@ -12,13 +14,17 @@
   animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
 }
 
-p, h2, h3, h4, h5, a, span{
-  font-family: 'Source Code Pro', monospace;
+p,
+h2,
+h3,
+h4,
+h5,
+a,
+span {
+  font-family: "Source Code Pro", monospace;
   color: #fc6603;
   font-weight: bold;
 }
-
-
 
 @-webkit-keyframes tracking-in-expand {
   0% {
