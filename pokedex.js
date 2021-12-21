@@ -51,7 +51,7 @@ const fetchPokemons = async () => {
       const pokedata = await res.json();
       // poke_types get types of each pokemon, this is used for change background depends type of pokemon
       const poke_types = pokedata.types.map((type) => type.type.name);
-      console.log(poke_types);
+      // console.log(poke_types);
       const type = poke_types.find((type) => poke_types.indexOf(type) > -1);
       const img = imgs[type];
       pokedata.types.map((type) => typeData.push(type.type.name));
